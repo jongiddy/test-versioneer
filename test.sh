@@ -51,10 +51,14 @@ python setup.py --version
 
 cd src
 
-versioneer-installer
+# Do not install Versioneer in the sub-directory
 
 cat > setup.py <<EOF
+import sys, os
 from setuptools import setup, find_packages
+
+# Add repo root directory containing versioneer to Python module path
+sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
 import versioneer
 versioneer.VCS = 'git'
